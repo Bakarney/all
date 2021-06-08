@@ -1,42 +1,81 @@
 <?php
-require_once "util.php";
+
 
 function build_fruit() {
-    $data = get_data("greenhouse");
-    foreach($data as $item) {
-        if ($item->plant) {
-            $plant = get_item("plant", ['_id'=>$item->plant]);
-            if ($item->time > $plant->time_seed + $plant->time_sprout + $plant->time_grow + $plant->time_flower) {
-                echo "<li> Теплиця " . $item->name . " - " . $plant->name . "</li>";
+    require 'connection.php';
+    $link = mysqli_connect($host, $user, $password, $database) 
+        or die("Ошибка " . mysqli_error($link));
+
+    $query_g ="SELECT * FROM greenhouse";
+    $result_g = mysqli_query($link, $query_g) or die("Ошибка " . mysqli_error($link));
+
+    foreach($result_g as $row) {
+        $query_plant ="SELECT * FROM plant WHERE ID=\"".$row['plant']."\"";
+        $result_plant = mysqli_query($link, $query_plant) or die("Ошибка " . mysqli_error($link));
+        foreach($result_plant as $row_p) {
+            
+            if ($row['time'] >= $row_p['time_seed'] + $row_p['time_sprout'] + $row_p['time_grow'] + $row_p['time_flower']) {
+                echo "<li> Теплиця " . $row['ID'] . " - " . $row_p['name'] . "</li>";
             }
+            
         }
     }
 }
 
 function build_ready() {
-    $data = get_data("greenhouse", ['plant'=>null]);
-    foreach($data as $item) {
-        if ($item->time > $item->kd_time) {
-            echo "<li> Теплиця " . $item->name . "</li>";
+    //работает
+    require 'connection.php';
+    $link = mysqli_connect($host, $user, $password, $database) 
+        or die("Ошибка " . mysqli_error($link));
+
+    $query_g ="SELECT * FROM greenhouse WHERE plant is NULL";
+    $result_g = mysqli_query($link, $query_g) or die("Ошибка " . mysqli_error($link));
+
+    foreach($result_g as $row) {
+        $query_s ="SELECT * FROM sizes WHERE ID=\"".$row['size']."\"";
+        $result_s = mysqli_query($link, $query_s) or die("Ошибка " . mysqli_error($link));
+        foreach($result_s as $row_s) {
+
+            if ($row['time'] > $row['kd_time']) {
+                echo "<li> Теплиця " . $row['ID']. " - розмір: ".$row_s['name']."". "</li>";
+            }
         }
     }
 }
 
 function build_other() {
-    $data = get_data("greenhouse");
-    foreach($data as $item) {
-        if ($item->plant == null) {
-            if ($item->time <= $item->kd_time) {
-                echo "<li> Теплиця " . $item->name . " - відпочіває, залишилось " . $item->kd_time - $item->time + 1 . "</li>";
+    require 'connection.php';
+    $link = mysqli_connect($host, $user, $password, $database) 
+        or die("Ошибка " . mysqli_error($link));
+
+    $query_g ="SELECT * FROM greenhouse";
+    $result_g = mysqli_query($link, $query_g) or die("Ошибка " . mysqli_error($link));
+    if($result_g) {
+        // echo 0;
+        foreach($result_g as $row) {
+            if (empty($row['plant'])) {
+                // echo 1;
+                if ($row['time'] <= $row['kd_time']) {
+                    // echo 2;
+                    echo "<li> Теплиця " . $row['ID'] . " - відпочиває, залишилось " . $row['kd_time'] - $row['time'] + 1 . "</li>";
+                }
             }
-        }
-        else {
-            $plant = get_item("plant", ['_id'=>$item->plant]);
-            $plant_time = $plant->time_seed + $plant->time_sprout + $plant->time_grow + $plant->time_flower + 1;
-            if ($item->time < $plant_time) {
-                echo "<li> Теплиця " . $item->name . " - посаджено " . $plant->name . ", залишилось " . $plant_time - $item->time . "</li>";
+            else {
+                // echo 3;
+                $query_plant ="SELECT * FROM plant WHERE ID=\"".$row['plant']."\"";
+                $result_plant = mysqli_query($link, $query_plant) or die("Ошибка " . mysqli_error($link));
+                foreach($result_plant as $row_p){
+                    $plant_time = $row_p['time_seed'] + $row_p['time_sprout'] + $row_p['time_grow'] + $row_p['time_flower'];
+                    if ($row['time'] < $plant_time) {
+                        // echo 4;
+                        echo "<li> Теплиця " . $row['ID'] . " - посаджено " . $row_p['name'] . ", залишилось " . $plant_time - $row['time'] . "</li>";
+                    }
+                }
             }
         }
     }
 }
+
+
+
 ?>

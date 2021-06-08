@@ -1,20 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <title>Sprout greenhouses: Greenhouses</title>
+    <link rel="stylesheet" href="../css/main.php">
+    
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
+    <script>
+        function test(id) {
+            elem = document.getElementById(id);
+            elem.value = window.pageYOffset;
+            // alert("высота экрана на момент нажатия"+id+"  "+elem.value);
+        }
+        function test_del(id_del) {
+            elem = document.getElementById(id_del);
+            elem.value = window.pageYOffset;
+            // alert("высота экрана на момент нажатия"+id_del+"  "+elem.value);
+        }
+    </script>
+    
 </head>
+
 <body>
 
+    
+    
+    
+
+
     <?php
-    require_once "../php/main.php";
-    require_once "../php/post.php";
+        // require_once "../php/test.php";
+        
+        require_once "../php/show_grenhouses.php";
+        require_once "../php/post.php";
+    
+        // require_once '../php/connection.php'; // подключаем скрипт
     ?>
+    
+    
+    
+
+
+
+
+
+
 
     <header>
         <img src="../media/hogwarts_1.png" alt="hogwarts emblem" class="header_img">
@@ -49,8 +83,14 @@
     <div class="main">
         
         <?php
-        build_greenhouses();
+            
+            show_greenhouses();
+            
         ?>
+
+    
+        
+        
 
         <form class="main_element_greenhouse" method="POST" id="add_greenhouse">
             
@@ -65,9 +105,10 @@
                     <div class="select">
                         <select required class="main_select_greenhouse"  name="add_size_green" >
                             <option disabled selected="selected"  value=''>Розмір</option>
-                            <option value="1">Мала</option>
-                            <option value="2">Середня</option>
-                            <option value="3">Велика</option>
+                            <?php
+                            // вывод доступных значений размеров теплиц
+                                select_sizes();
+                            ?>
                         </select> 
                     </div>
                     <div class="input">
@@ -81,6 +122,9 @@
             </div>
         </form>
         
+        
+        
+
     </div>
 
 
@@ -107,6 +151,8 @@
     </div>
     
     
+        
+    
     
     <footer>
         <div class="footer_img">
@@ -117,6 +163,20 @@
             <p class="footer_name">Професор П.Спраут</p>
         </div>
     </footer>
+
+
+
+
+
+    <?php
+        if (isset($_POST["scroll"])) {
+            // echo "<script> alert(".$_POST["scroll"].")";
+            echo "<script> scrollTo(0," . $_POST["scroll"] . "); </script>";
+        }
+       
+    ?>
+
+    
 
 </body>
 </html>

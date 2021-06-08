@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+    <title>Sprout greenhouses: Plants</title>
     
     <link rel="stylesheet" href="../css/flowers.php">
 
     <script defer src="../js/slideshow_1.js"></script>
-    <link rel="stylesheet" href="../css/slideshow_1.css">
+    <link rel="stylesheet" href="../css/slideshow_1.php">
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
@@ -18,7 +17,7 @@
 <body>
 
     <?php
-    require_once "../php/flowers.php";
+        require_once "../php/flowers.php";
     ?>
 
     <header>
@@ -50,12 +49,12 @@
             </ul>
         </div>
     </header>
-    
+
     <div class="main">
         <div class="line">
             
                 <?php
-                build_plant();
+                    build_plant();
                 ?>
 
         </div>
@@ -64,7 +63,7 @@
 
 
 
-
+<!-- diplay: none; -->
     <div class="side_buttons">
         <div class="side_buttons_filler"></div>
         <div class="side_buttons_rcenter">
@@ -72,5 +71,6 @@
             <button class="side_button btn_delete"></button>
         </div>
     </div>
+
 </body>
 </html>
