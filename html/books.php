@@ -39,9 +39,9 @@
               <span></span>
             </label>
             <ul class="menu__box">
-              <li><a class="menu__item" href="./flowers.html">Рослини</a></li>
-              <li><a class="menu__item" href="./books.html">Звіт</a></li>
-              <li><a class="menu__item" href="./index.html">Теплиці</a></li>
+              <li><a class="menu__item" href="./flowers.php">Рослини</a></li>
+              <li><a class="menu__item" href="./books.php">Звіт</a></li>
+              <li><a class="menu__item" href="./index.php">Теплиці</a></li>
             </ul>
         </div>
     </header>
@@ -80,7 +80,7 @@
     <div class="side_buttons">
         <div class="side_buttons_filler"></div>
         <div class="side_buttons_rcenter">
-            <button class="side_button btn_download"></button>
+            <!-- <button class="side_button btn_download"></button> -->
             <button class="side_button btn_up" onclick="document.location='#'"></button>
         </div>
     </div>
