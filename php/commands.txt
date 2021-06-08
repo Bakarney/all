@@ -1,0 +1,37 @@
+db.greenhouse.insertMany([
+    {
+        name: "3",
+        size: 2,
+        kd_time: 5,
+        plant: ObjectId("60bdbef6636c4f65d71fc520"),
+        time: 3
+    },
+    {
+        name: "4",
+        size: 2,
+        kd_time: 5,
+        plant: ObjectId("60bdbef6636c4f65d71fc520"),
+        time: 4
+    },
+    {
+        name: "5",
+        size: 2,
+        kd_time: 5,
+        plant: ObjectId("60bdbef6636c4f65d71fc520"),
+        time: 5
+    },
+    {
+        name: "6",
+        size: 2,
+        kd_time: 5,
+        plant: null,
+        time: 1
+    },
+    {
+        name: "7",
+        size: 2,
+        kd_time: 5,
+        plant: null,
+        time: 7
+    }
+]);
